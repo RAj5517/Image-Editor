@@ -1,0 +1,340 @@
+:root {
+    --primary-color: #4a90e2;
+    --secondary-color: #50e3c2;
+    --success-color: #4CAF50;
+    --warning-color: #ff9800;
+    --danger-color: #f44336;
+    --light-bg: #f8f9fa;
+    --dark-bg: #333;
+    --dark-text: #333;
+    --font-family: 'Inter', sans-serif;
+    --transition-speed: 0.3s;
+    --toast-bg: rgba(0, 0, 0, 0.8);
+    --modal-bg: rgba(0, 0, 0, 0.5);
+    --button-hover-bg: #3b7dc4;
+}
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: var(--font-family);
+}
+
+body {
+    background: #f0f2f5;
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    padding: 20px;
+    color: var(--dark-text);
+}
+
+/* Header */
+header {
+    margin-bottom: 20px;
+}
+
+header h1 {
+    font-size: 2em;
+    color: var(--primary-color);
+    text-align: center;
+}
+
+/* Upload Section */
+.upload-section {
+    margin-bottom: 20px;
+    text-align: center;
+}
+
+.upload-label {
+    background: var(--primary-color);
+    color: white;
+    padding: 10px 20px;
+    border-radius: 8px;
+    cursor: pointer;
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    transition: background var(--transition-speed);
+}
+
+.upload-label:hover,
+.upload-label:focus {
+    background: var(--secondary-color);
+    outline: none;
+}
+
+#uploadImage {
+    display: none;
+}
+
+/* Canvas Section */
+.canvas-section {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin-bottom: 20px;
+}
+
+canvas {
+    border: 2px solid #555;
+    max-width: 100%;
+    height: auto;
+    border-radius: 8px;
+}
+
+/* Controls */
+.controls {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 15px;
+    margin-bottom: 30px;
+}
+
+/* Filter Controls */
+.filter-controls {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+}
+
+.filter-controls label {
+    font-weight: 600;
+}
+
+.filter-controls select {
+    padding: 8px 12px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    transition: border-color var(--transition-speed);
+}
+
+.filter-controls select:focus {
+    border-color: var(--primary-color);
+    outline: none;
+}
+
+/* Action Buttons */
+.action-buttons {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 10px;
+}
+
+.action-buttons button {
+    background: var(--primary-color);
+    color: white;
+    border: none;
+    padding: 10px 15px;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: background var(--transition-speed), transform var(--transition-speed);
+    display: flex;
+    align-items: center;
+    gap: 5px;
+    font-size: 14px;
+}
+
+.action-buttons button:hover,
+.action-buttons button:focus {
+    background: var(--secondary-color);
+    transform: translateY(-2px);
+    outline: none;
+}
+
+.action-buttons button:active {
+    transform: translateY(0);
+}
+
+/* Modal Styling */
+.modal {
+    display: none;
+    position: fixed;
+    z-index: 2000;
+    left: 0;
+    top: 0;
+    width: 100%;
+    height: 100%;
+    overflow: auto;
+    background-color: var(--modal-bg);
+    animation: fadeInModal 0.3s ease-in-out;
+}
+
+@keyframes fadeInModal {
+    from {
+        opacity: 0;
+    }
+    to {
+        opacity: 1;
+    }
+}
+
+.modal-content {
+    background-color: white;
+    margin: 5% auto;
+    padding: 20px;
+    border-radius: 8px;
+    width: 90%;
+    max-width: 700px;
+    position: relative;
+    animation: slideDown 0.3s ease-in-out;
+}
+
+@keyframes slideDown {
+    from {
+        transform: translateY(-20px);
+        opacity: 0;
+    }
+    to {
+        transform: translateY(0);
+        opacity: 1;
+    }
+}
+
+.modal-content h2 {
+    margin-bottom: 15px;
+    color: var(--primary-color);
+    text-align: center;
+}
+
+.modal-content canvas {
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    max-width: 100%;
+    height: auto;
+    margin-bottom: 15px;
+}
+
+.modal-actions {
+    display: flex;
+    justify-content: flex-end;
+    gap: 10px;
+}
+
+.modal-actions button {
+    background: var(--primary-color);
+    color: white;
+    border: none;
+    padding: 10px 20px;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: background var(--transition-speed);
+}
+
+.modal-actions button:hover,
+.modal-actions button:focus {
+    background: var(--secondary-color);
+    outline: none;
+}
+
+.close {
+    position: absolute;
+    top: 15px;
+    right: 20px;
+    font-size: 1.5em;
+    color: #aaa;
+    cursor: pointer;
+    transition: color var(--transition-speed);
+    background: none;
+    border: none;
+}
+
+.close:hover,
+.close:focus {
+    color: #000;
+    outline: none;
+}
+
+/* Toast Notification */
+.toast {
+    position: fixed;
+    top: 20px;
+    right: 20px;
+    background-color: var(--toast-bg);
+    color: #fff;
+    padding: 15px 20px;
+    border-radius: 8px;
+    display: none;
+    align-items: center;
+    z-index: 3000;
+    min-width: 250px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+    animation: fadeInToast 0.5s, fadeOutToast 0.5s 2.5s;
+}
+
+@keyframes fadeInToast {
+    from { opacity: 0; transform: translateY(-10px); }
+    to { opacity: 1; transform: translateY(0); }
+}
+
+@keyframes fadeOutToast {
+    from { opacity: 1; transform: translateY(0); }
+    to { opacity: 0; transform: translateY(-10px); }
+}
+
+.toast-content {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    width: 100%;
+}
+
+.close-toast {
+    background: none;
+    border: none;
+    color: #fff;
+    font-size: 1.2em;
+    cursor: pointer;
+    margin-left: auto;
+}
+
+.close-toast:hover,
+.close-toast:focus {
+    color: #ddd;
+    outline: none;
+}
+
+/* Success, Error, Warning, Info Toasts */
+.toast.success {
+    background-color: rgba(76, 175, 80, 0.9);
+}
+
+.toast.error {
+    background-color: rgba(244, 67, 54, 0.9);
+}
+
+.toast.warning {
+    background-color: rgba(255, 152, 0, 0.9);
+}
+
+.toast.info {
+    background-color: rgba(33, 150, 243, 0.9);
+}
+
+/* Responsive Design */
+@media (max-width: 600px) {
+    .action-buttons {
+        flex-direction: column;
+        width: 100%;
+    }
+
+    .action-buttons button {
+        width: 100%;
+    }
+
+    .filter-controls {
+        flex-direction: column;
+        align-items: stretch;
+    }
+
+    .filter-controls label, .filter-controls select {
+        width: 100%;
+    }
+
+    .modal-content {
+        max-width: 90%;
+    }
+}
